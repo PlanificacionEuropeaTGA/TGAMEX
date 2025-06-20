@@ -1,75 +1,60 @@
-// Funcionalidad del selector de idioma
+// Script para el selector de idioma
 document.addEventListener('DOMContentLoaded', function() {
-    // Inicializar el idioma al cargar la página
-    const currentLang = getCurrentLanguage();
-    updatePageLanguage(currentLang);
+    // Inicializar el idioma
+    let currentLang = localStorage.getItem('tga-language') || 'es';
+    
+    // Aplicar el idioma al cargar la página
+    applyLanguage(currentLang);
+    
+    // Marcar el botón del idioma activo
     updateActiveLanguageButton(currentLang);
     
     // Agregar event listeners a los botones de idioma
-    const languageButtons = document.querySelectorAll('.language-selector button');
-    
-    languageButtons.forEach(button => {
+    document.querySelectorAll('.language-selector button').forEach(button => {
         button.addEventListener('click', function() {
-            const selectedLang = this.getAttribute('data-lang');
-            
-            // Agregar efecto de transición
-            document.body.classList.add('language-transition');
-            
-            setTimeout(() => {
-                setLanguage(selectedLang);
-                document.body.classList.remove('language-transition');
-                document.body.classList.add('loaded');
-            }, 150);
-            
-            // Efecto visual en el botón
-            this.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                this.style.transform = 'scale(1)';
-            }, 100);
-        });
-        
-        // Efecto hover mejorado
-        button.addEventListener('mouseenter', function() {
-            if (!this.classList.contains('active')) {
-                this.style.transform = 'scale(1.05)';
-            }
-        });
-        
-        button.addEventListener('mouseleave', function() {
-            if (!this.classList.contains('active')) {
-                this.style.transform = 'scale(1)';
-            }
+            const lang = this.getAttribute('data-lang');
+            localStorage.setItem('tga-language', lang);
+            applyLanguage(lang);
+            updateActiveLanguageButton(lang);
         });
     });
-    
-    // Detectar cambio de idioma del navegador
-    window.addEventListener('languagechange', function() {
-        const browserLang = navigator.language.substring(0, 2);
-        if (translations[browserLang]) {
-            setLanguage(browserLang);
-        }
-    });
-    
-    // Función para cambiar idioma programáticamente
-    window.changeLanguage = function(lang) {
-        if (translations[lang]) {
-            setLanguage(lang);
-        } else {
-            console.warn(`Idioma '${lang}' no disponible`);
-        }
-    };
-    
-    // Función para obtener todas las traducciones disponibles
-    window.getAvailableLanguages = function() {
-        return Object.keys(translations);
-    };
-    
-    // Función para obtener la traducción de una clave específica
-    window.getTranslation = function(key, lang = null) {
-        const targetLang = lang || getCurrentLanguage();
-        return translations[targetLang] && translations[targetLang][key] 
-            ? translations[targetLang][key] 
-            : key;
-    };
 });
 
+// Función para aplicar el idioma seleccionado
+function applyLanguage(lang) {
+    // Recorrer todos los elementos con atributo data-i18n
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        
+        // Si la clave existe en las traducciones, actualizar el contenido
+        if (translations[lang] && translations[lang][key]) {
+            element.innerHTML = translations[lang][key];
+        }
+    });
+    
+    // Actualizar atributos title y placeholder si existen
+    document.querySelectorAll('[data-i18n-title]').forEach(element => {
+        const key = element.getAttribute('data-i18n-title');
+        if (translations[lang] && translations[lang][key]) {
+            element.setAttribute('title', translations[lang][key]);
+        }
+    });
+    
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+        const key = element.getAttribute('data-i18n-placeholder');
+        if (translations[lang] && translations[lang][key]) {
+            element.setAttribute('placeholder', translations[lang][key]);
+        }
+    });
+}
+
+// Función para actualizar el botón de idioma activo
+function updateActiveLanguageButton(lang) {
+    document.querySelectorAll('.language-selector button').forEach(button => {
+        if (button.getAttribute('data-lang') === lang) {
+            button.classList.add('active');
+        } else {
+            button.classList.remove('active');
+        }
+    });
+}
