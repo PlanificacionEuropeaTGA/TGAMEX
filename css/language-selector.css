@@ -1,0 +1,60 @@
+/* Estilos específicos para el selector de idioma */
+.language-selector {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.language-selector button {
+    padding: 8px 12px;
+    border: 2px solid #4CAF50;
+    background: transparent;
+    color: #4CAF50;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    min-width: 45px;
+}
+
+.language-selector button:hover {
+    background: rgba(76, 175, 80, 0.1);
+    transform: scale(1.05);
+}
+
+.language-selector button.active {
+    background: #4CAF50;
+    color: white;
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+}
+
+.language-selector button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+}
+
+/* Animación para el cambio de idioma */
+.language-transition {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.language-transition.loaded {
+    opacity: 1;
+}
+
+/* Responsive para selector de idioma */
+@media (max-width: 768px) {
+    .language-selector {
+        justify-content: center;
+        margin-top: 10px;
+    }
+    
+    .language-selector button {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+        min-width: 40px;
+    }
+}
+
