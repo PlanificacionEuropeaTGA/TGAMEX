@@ -1,0 +1,50 @@
+/* Estilos añadidos (oct 2026): botones, WhatsApp, formulario y enlaces */
+.btn-row { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 10px; }
+.btn i { margin-right: 6px; }
+.btn { border: 2px solid transparent; cursor: pointer; font-size: 1rem; }
+.btn-wa { background-color: #25D366; }
+.btn-wa:hover { background-color: #1da851; }
+.btn-outline { background: transparent; border-color: #fff; color: #fff; }
+.btn-outline:hover { background: #fff; color: var(--dark-text); }
+.btn-outline-dark { background: transparent; border-color: var(--primary-color); color: var(--primary-color); }
+.btn-outline-dark:hover { background: var(--primary-color); color: #fff; }
+
+/* Títulos h1 con el mismo aspecto que antes */
+.section-header .as-h2 { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 15px; }
+.about-text .as-h3 { color: var(--primary-color); font-size: 1.8rem; margin-bottom: 20px; }
+.about-text p { margin-bottom: 15px; }
+
+/* Tarjetas de servicio clicables en Inicio */
+a.service-link { display: block; text-decoration: none; color: inherit; }
+.service-link .more { display: inline-block; margin-top: 15px; color: var(--secondary-color); font-weight: 600; }
+section[id], .service-card[id] { scroll-margin-top: 150px; }
+
+/* Llamado a la acción */
+.cta { background-color: var(--background-light); text-align: center; }
+.cta .section-header { margin-bottom: 0; }
+.cta .btn-row { margin-top: 25px; }
+
+/* Contacto */
+.contact-item a, .footer-nav-section li a { word-break: break-word; }
+.contact-item a { color: var(--dark-text); text-decoration: none; border-bottom: 1px solid var(--primary-color); }
+.contact-item a:hover { color: var(--primary-color); }
+.contact-top { align-items: start; }
+.contact-form h3 { color: var(--primary-color); margin-bottom: 20px; }
+.form-group select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem; background: #fff; }
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: 2px solid var(--primary-color); border-color: transparent; }
+.contact-form .btn { width: 100%; text-align: center; }
+.form-note { font-size: 0.85rem; color: #666; margin-top: 10px; text-align: center; }
+.contact-wide { margin-top: 50px; }
+.contact-wide img { max-width: 900px; max-height: 380px; object-fit: cover; }
+.social-dark a { color: var(--dark-text); }
+.footer-nav-section li i { color: var(--primary-color); margin-right: 6px; }
+
+/* Botón flotante de WhatsApp (queda arriba de la etiqueta del hosting) */
+.wa-float { position: fixed; right: 20px; bottom: 70px; width: 56px; height: 56px; border-radius: 50%; background: #25D366; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.9rem; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 999; text-decoration: none; transition: transform 0.2s; }
+.wa-float:hover { transform: scale(1.08); }
+
+@media (max-width: 480px) {
+  .section-header .as-h2, .section-header h2 { font-size: 1.9rem; }
+  .btn-row .btn { width: 100%; text-align: center; }
+  .wa-float { width: 50px; height: 50px; font-size: 1.7rem; right: 14px; }
+}
