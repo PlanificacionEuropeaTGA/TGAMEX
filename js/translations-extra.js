@@ -64,7 +64,7 @@ Object.assign(translations.de, {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-  var WA_NUMBER = '5212221734899'; // WhatsApp de contacto
+  var WA_NUMBER = '5212202328866'; // WhatsApp de contacto
 
   function currentLang() {
     try { return localStorage.getItem('tga-language') || 'es'; } catch (e) { return 'es'; }
